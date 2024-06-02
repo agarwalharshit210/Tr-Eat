@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Tr-Eat</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+
+    <!-- Favicon -->
+    <link href="/static/img/favicon.ico" rel="icon">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Nunito:600,700" rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="/static/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/static/lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="/static/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Template Stylesheet -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="/static/css/demo.css" rel="stylesheet">
+    <link href="/static/css/boot.css" rel="stylesheet">
+    <link href="/static/css/stytwo.css" rel="stylesheet">
+
+
+    {% if message %}
+    <script>
+        alert(' {{message}} ');
+    </script>
+    {% endif %}
+
+    <script type="text/javascript">
+        var user = '{{request.user}}'
+
+        function getToken(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        var csrftoken = getToken('csrftoken');
+
+
+        function getCookie(name) {
+            var cookieArr = document.cookie.split(";");
+
+            for (var i = 0; i < cookieArr.length; i++) {
+                var cookiePair = cookieArr[i].split("=");
+
+                if (name == cookiePair[0].trim()) {
+                    return decodeURIComponent(cookiePair[1]);
+                }
+            }
+
+            return null;
+        }
+        var cart = JSON.parse(getCookie('cart'))
+
+        if (cart == undefined) {
+            cart = {}
+            console.log('Cart was Created')
+            document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+        }
+        console.log('Cart:', cart)
+    </script>
+
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ****** Welcome Area Start ****** -->
+    <section id="home" class="overflow-hidden">
+        <!-- Welcome Social Info -->
+        <!-- Welcome Slides -->
+        <div class="carousel">
+            <div class="container-fluid" style="max-width: 1519px !important;">
+                <div class="owl-carousel">
+                    <div class="single-hero-slides bg-img">
+                        <video autoplay muted loop>
+                            <source src="/static/video/Pizza.mp4" type="video/mp4" />
+                        </video>
+                        <div class="container h-100">
+                            <div class="row h-100 align-items-center">
+                                <div class="col-11 col-md-6 col-lg-4">
+                                    <div class="hero-content">
+                                        <h1 class="to-animate"
+                                            style="font-size: 70px; font-style:italic;color: #fbaf32;">T<span
+                                                style="color: red;" class="auto-type"></span></h1>
+                                        <p style="color: #ffffff;text-align: center;font-size: 20px;font-style: italic;margin-bottom: 35px;
+                                            font-weight: bold;">&ldquo;Cooking is an art, but all art requires knowing
+                                            something about the
+                                            techniques and
+                                            materials&rdquo;</p>
+                                        <div class="move" style="display: flex;">
+                                            <a href="{% url 'order' %}" class="btn caviar-btn">Order Now</a>
+                                            <a href="{% url 'contact' %}" class="btn caviar-btn">Feedback</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Single Slides -->
+                    <div class="single-hero-slides bg-img">
+                        <video autoplay muted loop>
+                            <source src="/static/video/coffee.mp4" type="video/mp4" />
+                        </video>
+                        <div class="container h-100">
+                            <div class="row h-100 align-items-center">
+                                <div class="col-11 col-md-6 col-lg-4">
+                                    <div class="hero-content">
+                                        <h1 class="to-animate"
+                                            style="font-size: 70px; font-style:italic;color: #fbaf32;">T<span
+                                                style="color: red;" class="auto-type1"></span></h1>
+                                        <p style="color: #ffffff;text-align: center;font-size: 20px;font-style: italic;margin-bottom: 35px;
+                                    font-weight: bold;">&ldquo;Give a man food, and he can eat for a day. Give a man a
+                                            job, and he
+                                            can only eat for
+                                            30 minutes on break.&rdquo;</p>
+                                        <div class="move" style="display: flex;">
+                                            <a href="{% url 'order' %}" class="btn caviar-btn">Order Now</a>
+                                            <a href="{% url 'contact' %}" class="btn caviar-btn">Feedback</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                    <div class="single-hero-slides bg-img">
+                        <video autoplay muted loop>
+                            <source src="/static/video/burger.mp4" type="video/mp4" />
+                        </video>
+                        <div class="container h-100">
+                            <div class="row h-100 align-items-center">
+                                <div class="col-11 col-md-6 col-lg-4">
+                                    <div class="hero-content">
+                                        <h1 class="to-animate"
+                                            style="font-size: 70px; font-style:italic;color: #fbaf32;">T<span
+                                                style="color: red;" class="auto-type2"></span></h1>
+                                        <p
+                                            style="color: #ffffff;text-align: center;font-size: 20px;font-style: italic;margin-bottom: 35px;font-weight: bold;">
+                                            &ldquo;Find something you’re passionate about and keep tremendously
+                                            interested in it.&rdquo;
+                                        </p>
+                                        <div class="move" style="display: flex;">
+                                            <a href="{% url 'order' %}" class="btn caviar-btn">Order Now</a>
+                                            <a href="{% url 'contact' %}" class="btn caviar-btn">Feedback</a>
+                                        </div>
+                                    </div </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <div class="navbar navbar-expand-lg bg-light navbar-light" style="padding: 0px 0px;
+    background: #050505 !important;">
+        <div class="container-fluid">
+            <img src="/static/img/logoo1.jpg" height="80" width="80" style="margin: 2px 24px;border-radius: 40px;"
+                alt="Error Loading">
+            <a href="{% url 'index' %}" class="navbar-brand" style="color:#fbaf32;">T<span>r -Eat</span></a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"
+                    style="background-image:url('../static/img/navbar_toggle.png');background-color:black;"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav ml-auto">
+                    <a href="{% url 'index' %}" class="nav-item nav-link active" style="color:#fbaf32;">Home</a>
+                    <a href="{% url 'about' %}" class="nav-item nav-link" style="color: white;">About</a>
+                    <a href="{% url 'feature' %}" class="nav-item nav-link" style="color: white;">Feature</a>
+                    <a href="{% url 'order' %}" class="nav-item nav-link" style="color: white;">Order</a>
+                    <a href="{% url 'contact' %}" class="nav-item nav-link" style="color: white;">Contact</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+  <!-- Feature Start -->
+<div class="feature">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="section-header">
+                    <p>Why Choose Us</p>
+                    <h2>Our Key Features</h2>
+                </div>
+                <div class="feature-text">
+                    <div class="feature-img">
+                        <div class="row">
+                            <div class="col-6">
+                                <img src="/static/img/feature-1.jpg" alt="Image">
+                            </div>
+                            <div class="col-6">
+                                <img src="/static/img/feature-2.jpg" alt="Image">
+                            </div>
+                            <div class="col-6">
+                                <img src="/static/img/feature-3.jpg" alt="Image">
+                            </div>
+                            <div class="col-6">
+                                <img src="/static/img/feature-4.jpg" alt="Image">
+                            </div>
+                        </div>
+                    </div>
+                    <p>
+                        Success in the fast food industry requires mastery of a different set of parameters than in the fine dining sector. Customers who go to a fast food business are looking for speed, convenience, affordability and predictability rather than a memorable dining experience. Fast food entrepreneurs who understand this can master these elements of the business. With care attention to customer service and operational detail, your fast food enterprise can hopefully turn a reasonable profit.
+                    </p>
+                    <a class="btn custom-btn" href="{% url 'order' %}">Order Now</a>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="feature-item">
+                            <i class="flaticon-cooking"></i>
+                            <h3>World’s best Chef</h3>
+                            <p>
+                            They have to genuinely enjoy the whole process of procuring, preparing, cooking and serving food and have to be able to design menus too.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="feature-item">
+                            <i class="flaticon-vegetable"></i>
+                            <h3>Natural ingredients</h3>
+                            <p>
+                                So we make sure to stock our kitchen with a few of these cooking ingredients to get on the path to a better diet.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="feature-item">
+                            <i class="flaticon-medal"></i>
+                            <h3>Best quality products</h3>
+                            <p>
+                                Every ingredient that is used to create a menu item has to be verified for its quality to ensure the final dish is up to mark.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="feature-item">
+                            <i class="flaticon-meat"></i>
+                            <h3>Fresh vegetables & Meet</h3>
+                            <p>
+                                They contain essential vitamins, minerals, fiber and other nutrients that are essential for good health.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="feature-item">
+                            <i class="flaticon-courier"></i>
+                            <h3>Fastest door delivery</h3>
+                            <p>
+                                We Providing fastest food delivery
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="feature-item">
+                            <i class="flaticon-fruits-and-vegetables"></i>
+                            <h3>Ground beef & Low fat</h3>
+                            <p>
+                                In order for a food to be called “low-fat”, it must contain no more than three grams of fat per 100 calories, or contain no more than 30 percent of calories from fat. 
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Feature End -->
+
+    <div style="background: url(/static/img/wood_1.png) repeat;" id="fh5co-featured" data-section="features">
+        <div class="container">
+            <div class="row text-center fh5co-heading row-padded">
+                <div style="margin: auto;" class="col-md-8 col-md-offset-2">
+                    <h2 class="heading to-animate">Featured Dishes</h2>
+                    <p class="sub-heading to-animate">Far far away, behind the word mountains, far from the countries
+                        Vokalia and Consonantia, there live the blind texts.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="fh5co-grid">
+                    <div class="fh5co-v-half to-animate-2">
+                        <div class="fh5co-v-col-2 fh5co-bg-img" style="background-image: url(/static/img/biryani.jpg)">
+                        </div>
+                        <div class="fh5co-v-col-2 fh5co-text fh5co-special-1 arrow-left">
+                            <h2>Fresh Mushrooms</h2>
+                            <span class="pricing">$7.50</span>
+                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
+                                there live the blind texts.</p>
+                        </div>
+                    </div>
+                    <div class="fh5co-v-half">
+                        <div class="fh5co-h-row-2 to-animate-2">
+                            <div class="fh5co-v-col-2 fh5co-bg-img"
+                                style="background-image: url(/static/img/anda.webp)"></div>
+                            <div class="fh5co-v-col-2 fh5co-text arrow-left">
+                                <h2>Grilled Chiken Salad</h2>
+                                <span class="pricing">$12.00</span>
+                                <p>Far far away, behind the word mountains.</p>
+                            </div>
+                        </div>
+                        <div class="fh5co-h-row-2 fh5co-reversed to-animate-2">
+                            <div class="fh5co-v-col-2 fh5co-bg-img"
+                                style="background-image: url(/static/img/menu-burger-img.jpg)"></div>
+                            <div class="fh5co-v-col-2 fh5co-text arrow-right">
+                                <h2>Cheese and Garlic Toast</h2>
+                                <span class="pricing">$4.50</span>
+                                <p>Far far away, behind the word mountains.</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="fh5co-v-half">
+                        <div class="fh5co-h-row-2 fh5co-reversed to-animate-2">
+                            <div class="fh5co-v-col-2 fh5co-bg-img"
+                                style="background-image: url(/static/img/menu-beverage-img.jpg)"></div>
+                            <div class="fh5co-v-col-2 fh5co-text arrow-right">
+                                <h2>Organic Egg</h2>
+                                <span class="pricing">$4.99</span>
+                                <p>Far far away, behind the word mountains.</p>
+                            </div>
+                        </div>
+                        <div class="fh5co-h-row-2 to-animate-2">
+                            <div class="fh5co-v-col-2 fh5co-bg-img"
+                                style="background-image: url(/static/img/quick_bites.jpg)"></div>
+                            <div class="fh5co-v-col-2 fh5co-text arrow-left">
+                                <h2>Salad with Crispy Chicken</h2>
+                                <span class="pricing">$8.50</span>
+                                <p>Far far away, behind the word mountains.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fh5co-v-half to-animate-2">
+                        <div class="fh5co-v-col-2 fh5co-bg-img" style="background-image: url(/static/img/snakes.jpg)">
+                        </div>
+                        <div class="fh5co-v-col-2 fh5co-text fh5co-special-1 arrow-left">
+                            <h2>Tomato Soup with Chicken</h2>
+                            <span class="pricing">$12.99</span>
+                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
+                                there live the blind texts.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <section class="text-gray-600 body-font">
+        <div class="container px-5 py-10 mx-auto">
+            <div class="flex flex-col text-center w-full mb-20">
+                <h1 class="lg:text-3xl text-2xl font-medium title-font text-gray-900" style="font-size: 50px;">Gallery
+                </h1>
+            </div>
+            <div class="flex flex-wrap -m-4">
+                <div class="lg:w-1/3 sm:w-1/2 p-4">
+                    <div class="flex relative">
+                        <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center"
+                            src="/static/img/combo.jpg">
+                        <div
+                            class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
+                            <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Burger</h1>
+                            <p class="leading-relaxed">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing
+                                microdosing tousled waistcoat.</p>
+                            <a href="{% url 'order' %}">View Menu</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/3 sm:w-1/2 p-4">
+                    <div class="flex relative">
+                        <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center"
+                            src="/static/img/biryani.jpg">
+                        <div
+                            class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
+                            <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Biryani</h1>
+                            <p class="leading-relaxed">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing
+                                microdosing tousled waistcoat.</p>
+                            <a href="{% url 'order' %}">View Menu</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/3 sm:w-1/2 p-4">
+                    <div class="flex relative">
+                        <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center"
+                            src="/static/img/menu-beverage-img.jpg">
+                        <div
+                            class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
+                            <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Beverages</h1>
+                            <p class="leading-relaxed">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing
+                                microdosing tousled waistcoat.</p>
+                            <a href="{% url 'order' %}">View Menu</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/3 sm:w-1/2 p-4">
+                    <div class="flex relative">
+                        <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center"
+                            src="/static/img/quick_bites.jpg">
+                        <div
+                            class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
+                            <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Quick_bites</h1>
+                            <p class="leading-relaxed">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing
+                                microdosing tousled waistcoat.</p>
+                            <a href="{% url 'order' %}">View Menu</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/3 sm:w-1/2 p-4">
+                    <div class="flex relative">
+                        <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center"
+                            src="/static/img/snakes.jpg">
+                        <div
+                            class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
+                            <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Snakes</h1>
+                            <p class="leading-relaxed">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing
+                                microdosing tousled waistcoat.</p>
+                            <a href="{% url 'order' %}">View Menu</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/3 sm:w-1/2 p-4">
+                    <div class="flex relative">
+                        <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center"
+                            src="/static/img/anda.webp">
+                        <div
+                            class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
+                            <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Ande ka Funda</h1>
+                            <p class="leading-relaxed">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing
+                                microdosing tousled waistcoat.</p>
+                            <a href="{% url 'order' %}">View Menu</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+         <!-- Testimonial Start -->
+         <div class="testimonial">
+            <div class="container">
+                <div class="flex flex-col text-center w-full mb-20">
+                    <h1 class="lg:text-3xl text-2xl font-medium title-font text-gray-900" style="font-size: 50px;">Client's Review
+                    </h1>
+                </div>
+                <div class="owl-carousel testimonials-carousel">
+                    <div class="testimonial-item">
+                        <div class="mb-3">
+    						<i class="fas fa-star star-light mr-1 main_star"></i>
+                            <i class="fas fa-star star-light mr-1 main_star"></i>
+                            <i class="fas fa-star star-light mr-1 main_star"></i>
+                            <i class="fas fa-star star-light mr-1 main_star"></i>
+                            <i class="fas fa-star star-light mr-1 main_star"></i>
+	    				</div>
+                        <p>
+                            Lorem ipsum dolor sit amet elit. Phasel nec preti mi. Curabit facilis ornare velit non vulput
+                        </p>
+                        <h2>Client Name</h2>
+                    </div>
+                    <div class="testimonial-item">
+                        <div class="mb-3">
+    						<i class="fas fa-star star-light mr-1 main_star"></i>
+                            <i class="fas fa-star star-light mr-1 main_star"></i>
+                            <i class="fas fa-star star-light mr-1 main_star"></i>
+                            <i class="fas fa-star star-light mr-1 main_star"></i>
+                            <i class="fas fa-star star-light mr-1 main_star"></i>
+	    				</div>
+                        <p>
+                            Lorem ipsum dolor sit amet elit. Phasel nec preti mi. Curabit facilis ornare velit non vulput
+                        </p>
+                        <h2>Client Name</h2>
+                    </div>
+                    <div class="testimonial-item">
+                        <div class="mb-3">
+    						<i class="fas fa-star star-light mr-1 main_star"></i>
+                            <i class="fas fa-star star-light mr-1 main_star"></i>
+                            <i class="fas fa-star star-light mr-1 main_star"></i>
+                            <i class="fas fa-star star-light mr-1 main_star"></i>
+                            <i class="fas fa-star star-light mr-1 main_star"></i>
+	    				</div>
+                        <p>
+                            Lorem ipsum dolor sit amet elit. Phasel nec preti mi. Curabit facilis ornare velit non vulput
+                        </p>
+                        <h2>Client Name</h2>
+                    </div>
+                    <div class="testimonial-item">
+                        <div class="mb-3">
+    						<i class="fas fa-star star-light mr-1 main_star"></i>
+                            <i class="fas fa-star star-light mr-1 main_star"></i>
+                            <i class="fas fa-star star-light mr-1 main_star"></i>
+                            <i class="fas fa-star star-light mr-1 main_star"></i>
+                            <i class="fas fa-star star-light mr-1 main_star"></i>
+	    				</div>
+                        <p>
+                            Lorem ipsum dolor sit amet elit. Phasel nec preti mi. Curabit facilis ornare velit non vulput
+                        </p>
+                        <h2>Client Name</h2>
+                    </div>
+                </div>
+                <div class="move m-auto" style="width: 10rem;">
+                    <a href="{% url 'order' %}" class="btn caviar-btn">Review Now</a>
+                </div>
+            </div>
+        </div>
+        <!-- Testimonial End -->
+
+    <!-- Contact Start -->
+    <div class="contact">
+        <div class="container">
+            <div class="section-header text-center">
+                <p>Contact Us</p>
+                <h2>Contact For Any Query</h2>
+            </div>
+            <div class="row align-items-center contact-information">
+                <div class="col-md-6 col-lg-3">
+                    <div class="contact-info">
+                        <div class="contact-icon">
+                            <i class="fa fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Address</h3>
+                            <p>Sector 9, Malviya Nagar, Jaipur, Rajasthan 302017</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="contact-info">
+                        <div class="contact-icon">
+                            <i class="fa fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Call Us</h3>
+                            <p>+91-7357696564</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="contact-info">
+                        <div class="contact-icon">
+                            <i class="fa fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Email Us</h3>
+                            <p>meetattreat@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="contact-info">
+                        <div class="contact-icon">
+                            <i class="fa fa-share"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Follow Us</h3>
+                            <div class="contact-social">
+                                <a href=""><i class="fab fa-facebook-f"></i></a>
+                                <a href=""><i class="fab fa-youtube"></i></a>
+                                <a href=""><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row contact-form">
+                <div class="col-md-6">
+                    <iframe src="https://www.google.com/maps/d/embed?mid=1x0ezaezD_FDrJc58nCNd6Eq49cFO004&ehbc=2E312F"
+                        width="640" height="480"></iframe>
+                </div>
+                <div class="col-md-6">
+                    <div id="success"></div>
+
+                    <form name="sentMessage" method="post">
+                        {% csrf_token %}
+                        <div class="control-group">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Your Name"
+                                required="required" data-validation-required-message="Please enter your name" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Your Email"
+                                required="required" data-validation-required-message="Please enter your email" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject"
+                                required="required" data-validation-required-message="Please enter a subject" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <textarea class="form-control" id="message" name="message" placeholder="Message"
+                                required="required"
+                                data-validation-required-message="Please enter your message"></textarea>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div>
+                            <button class="btn custom-btn" type="submit">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+    <!-- Footer Start -->
+    <div class="footer" style="background: black;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="row">
+                        <div class="col-md-3" style="flex: 4 0 33%;
+                    max-width: 50%;">
+                            <div class="footer-contact">
+                                <h2>Our Address</h2>
+                                <p style="color: white;"><i class="fa fa-map-marker-alt"></i>Sector 9, Malviya Nagar,
+                                    Jaipur, Rajasthan 302017</p>
+                                <p style="color: white;"><i class="fa fa-phone-alt"></i>+91-7357696564</p>
+                                <p style="color: white;"><i class="fa fa-envelope"></i>meetattreat@gmail.com</p>
+                                <div class="footer-social">
+                                    <a href=""><i class="fab fa-facebook-f"></i></a>
+                                    <a href=""><i class="fab fa-youtube"></i></a>
+                                    <a href=""><i class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3" style="flex: 1 0 30%;
+                    max-width: 50%;">
+                            <div class="footer-link">
+                                <h2>Quick Links</h2>
+                                <a style="color: white;" href="{% url 'index' %}">Home</a>
+                                <a style="color: white;" href="{% url 'about' %}">About</a>
+                                <a style="color: white;" href="{% url 'feature' %}">Feature</a>
+                                <a style="color: white;" href="{% url 'order' %}">Order</a>
+                                <a style="color: white;" href="{% url 'contact' %}">Contact</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3" style="flex: 1 0 30%;
+                    max-width: 50%;">
+                            <div class="footer-contact">
+                                <h2>Open Hours</h2>
+                                <p style="color: white;">Monday-Friday <br>8:00AM-8:00PM</p>
+                                <p style="color: white;">Saturday-Sunday <br>2:00AM-8:00PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="footer-newsletter">
+                        <h2>Also Availabel on</h2>
+                        <div class="image d-flex">
+                            <img src="/static/img/zomato.svg" style="height: 70px; margin: 2px 4px;"
+                                alt="Error Loading">
+                            <img src="/static/img/swiggy.png" style="height: 100px;" alt="Error Loading">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <div class="container">
+                <p>Copyright &copy; <a href="#">Tr-Eat</a>, All Right Reserved.</p>
+                <p>Designed By <a href="#">Harshit Agarwal</a></p>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+    <!-- Footer End -->
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/lib/easing/easing.min.js"></script>
+    <script src="/static/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/static/lib/tempusdominus/js/moment.min.js"></script>
+    <script src="/static/lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="/static/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+    <script>
+        var typed = new Typed(".auto-type", {
+            strings: ['r-Eat'],
+            typeSpeed: 250,
+            backSpeed: 150,
+            loop: true
+        })
+
+        var typed = new Typed(".auto-type1", {
+            strings: ['r-Eat'],
+            typeSpeed: 250,
+            backSpeed: 150,
+            loop: true
+        })
+
+        var typed = new Typed(".auto-type2", {
+            strings: ['r-Eat'],
+            typeSpeed: 250,
+            backSpeed: 150,
+            loop: true
+        })
+
+    </script>
+
+    <!-- Contact Javascript File -->
+    <script src="/static/mail/jqBootstrapValidation.min.js"></script>
+    <script src="/static/mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="/static/js/main.js"></script>
+    <script type="text/javascript" src="/static/js/cart.js"></script>
+</body>
+
+</html>

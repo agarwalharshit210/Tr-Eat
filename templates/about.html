@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+ 
+ <!-- Page Header Start -->
+ <div class="page-header mb-0" style="background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(../static/img/page-header.jpg); background-position: center;
+ background-repeat: no-repeat;
+ background-size: cover;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>About Us</h2>
+            </div>
+            <div class="col-12">
+                <a href="">Home</a>
+                <a href="">About Us</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+
+ <!-- About Start -->
+ <div id="fh5co-about" data-section="about" style="margin: 39px 9px;">
+    <div class="fh5co-2col fh5co-bg to-animate-2" style="background-image: url(/static/img/res_img_1.jpg)"></div>
+    <div class="fh5co-2col fh5co-text">
+        <h2 class="heading to-animate">About Us</h2>
+        <p style="text-align: center;" class="to-animate"><span class="firstcharacter">F</span>ar far away, behind the word mountains, far
+            from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in
+            Bookmarksgrove right at the coast of the Semantics, a large language ocean. Far far away, behind the
+            word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. A small
+            river named Duden flows by their place and supplies it with the necessary regelialia. It is a
+            paradisematic country, in which roasted parts of sentences fly into your mouth. Even the
+            all-powerful Pointing has no control about the blind texts it is an almost unorthographic life.</p>
+        <p class="text-center to-animate"><a href="{% url 'order' %}" class="btn btn-primary btn-outline">Order
+                Now</a></p>
+    </div>
+</div>
+<!-- About End -->
+<!-- About End -->
+
+
+<!-- Video Modal Start-->
+<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>        
+                <!-- 16:9 aspect ratio -->
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="" id="video"  allowscriptaccess="always" allow="autoplay"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+<!-- Video Modal End -->
+
+{% endblock %}

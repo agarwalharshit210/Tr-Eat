@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Tr-Eat</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+
+    <!-- Favicon -->
+    <link href="/static/img/favicon.ico" rel="icon">
+    <!-- <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"> -->
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Nunito:600,700" rel="stylesheet">
+
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="/static/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/static/lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="/static/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Template Stylesheet -->
+    <link href="/static/css/style.css" rel="stylesheet">
+    <link href="/static/css/demo.css" rel="stylesheet">
+    <link href="/static/css/boot.css" rel="stylesheet">
+    <link href="/static/css/stytwo.css" rel="stylesheet">
+
+
+    <script type="text/javascript">
+        var user = '{{request.user}}'
+
+        function getToken(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        var csrftoken = getToken('csrftoken');
+
+
+        function getCookie(name) {
+            var cookieArr = document.cookie.split(";");
+
+            for (var i = 0; i < cookieArr.length; i++) {
+                var cookiePair = cookieArr[i].split("=");
+
+                if (name == cookiePair[0].trim()) {
+                    return decodeURIComponent(cookiePair[1]);
+                }
+            }
+
+            return null;
+        }
+        var cart = JSON.parse(getCookie('cart'))
+
+        if (cart == undefined) {
+            cart = {}
+            console.log('Cart was Created')
+            document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+        }
+        console.log('Cart:', cart)
+    </script>
+</head>
+
+<body>
+
+    <div class="navbar navbar-expand-lg bg-light navbar-light" style="padding: 0px 0px;
+    background: #050505 !important;">
+        <div class="container-fluid">
+            <img src="/static/img/logoo1.jpg" height="80" width="80" style="margin: 2px 24px;border-radius: 40px;"
+                alt="Error Loading">
+            <a href="{% url 'index' %}" class="navbar-brand" style="color:#fbaf32;">T<span>r -Eat</span></a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"
+                    style="background-image:url('../static/img/navbar_toggle.png');background-color:black;"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav ml-auto">
+                    <a href="{% url 'index' %}" class="nav-item nav-link active" style="color:#fbaf32;">Home</a>
+                    <a href="{% url 'about' %}" class="nav-item nav-link" style="color: white;">About</a>
+                    <a href="{% url 'feature' %}" class="nav-item nav-link" style="color: white;">Feature</a>
+                    <a href="{% url 'order' %}" class="nav-item nav-link" style="color: white;">Order</a>
+                    <a href="{% url 'contact' %}" class="nav-item nav-link" style="color: white;">Contact</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nav Bar End -->
+
+    {% block content %}
+    {% endblock %}
+
+    <!-- Footer Start -->
+    <div class="footer" style="background: black;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="row">
+                        <div class="col-md-3" style="flex: 4 0 33%;
+                    max-width: 50%;">
+                            <div class="footer-contact">
+                                <h2>Our Address</h2>
+                                <p style="color: white;"><i class="fa fa-map-marker-alt"></i>Sector 9, Malviya Nagar,
+                                    Jaipur, Rajasthan 302017</p>
+                                <p style="color: white;"><i class="fa fa-phone-alt"></i>+91-7357696564</p>
+                                <p style="color: white;"><i class="fa fa-envelope"></i>meetattreat@gmail.com</p>
+                                <div class="footer-social">
+                                    <a href=""><i class="fab fa-facebook-f"></i></a>
+                                    <a href=""><i class="fab fa-youtube"></i></a>
+                                    <a href=""><i class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3" style="flex: 1 0 30%;
+                    max-width: 50%;">
+                            <div class="footer-link">
+                                <h2>Quick Links</h2>
+                                <a style="color: white;" href="{% url 'index' %}">Home</a>
+                                <a style="color: white;" href="{% url 'about' %}">About</a>
+                                <a style="color: white;" href="{% url 'feature' %}">Feature</a>
+                                <a style="color: white;" href="{% url 'order' %}">Order</a>
+                                <a style="color: white;" href="{% url 'contact' %}">Contact</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3" style="flex: 1 0 30%;
+                    max-width: 50%;">
+                            <div class="footer-contact">
+                                <h2>Open Hours</h2>
+                                <p style="color: white;">Monday-Friday <br>8:00AM-8:00PM</p>
+                                <p style="color: white;">Saturday-Sunday <br>2:00AM-8:00PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="footer-newsletter">
+                        <h2>Also Availabel on</h2>
+                        <div class="image">
+                            <img src="/static/img/zomato.svg" style="height: 70px; margin: 2px 4px;"
+                                alt="Error Loading">
+                            <img src="/static/img/swiggy.png" style="height: 100px;" alt="Error Loading">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <div class="container">
+                <p>Copyright &copy; <a href="#">Tr-Eat</a>, All Right Reserved.</p>
+                <p>Designed By <a href="#">Harshit Agarwal</a></p>
+            </div>
+        </div>
+    </div>
+
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+    <!-- Footer End -->
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/lib/easing/easing.min.js"></script>
+    <script src="/static/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/static/lib/tempusdominus/js/moment.min.js"></script>
+    <script src="/static/lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="/static/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="/static/mail/jqBootstrapValidation.min.js"></script>
+    <script src="/static/mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="/static/js/main.js"></script>
+    <script type="text/javascript" src="/static/js/cart.js"></script>
+</body>
+
+</html>
